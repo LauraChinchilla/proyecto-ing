@@ -14,9 +14,12 @@ class Favorite(models.Model):
 
 class FavoriteItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    Favorite = models.ForeignKey(Favorite, on_delete=models.CASCADE)
+    favorite = models.ForeignKey(Favorite, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
 
-    def __str__(self):
+    def sub_total(self):
+        return self.product.price
+
+    def __unicode__(self):
         return self.product

@@ -186,7 +186,7 @@
 											<span class="price">L. {{product.price}}</span>
 										</div> <!-- price-wrap.// -->
 									</div>
-									<a href="#" class="btn btn-block btn-success">Agregar a Favoritos </a>
+									<a href="{% url 'add_favorite' product.id %}" class="btn btn-block btn-success">Agregar a Favoritos </a>
 								</figcaption>
 							</figure>
 						</div> <!-- col.// -->

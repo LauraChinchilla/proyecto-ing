@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from store.models import Product
 from .models import Favorite, FavoriteItem
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
-
 
 
 def _favorite_id(request):
@@ -17,17 +17,17 @@ def add_favorite(request, product_id):
     try:
         favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
     except Favorite.DoesNotExist:
-        favorite = Favorite.object.create(
+        favorite = Favorite.objects.create(
             favorite_id = _favorite_id(request)
         )
     favorite.save()
 
     try:
-        favorite_item = FavoriteItem.object.get(product=product, favorite=favorite)
+        favorite_item = FavoriteItem.objects.get(product=product, favorite=favorite)
         favorite_item.quantity +=1
         favorite_item.save()
     except FavoriteItem.DoesNotExist:
-        favorite_item = FavoriteItem.object.create(
+        favorite_item = FavoriteItem.objects.create(
             product = product,
             quantity = 1,
             favorite = favorite,
@@ -37,5 +37,28 @@ def add_favorite(request, product_id):
     return redirect('favorite')
 
 
-def favorite(request):
-    return render(request, 'store/favorite.html')
+def remove_favorite_item(request, product_id, quantity=1):
+    favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
+    product = get_object_or_404(Product, id=product_id)
+    favorite_item = FavoriteItem.objects.get(product=product, favorite=favorite, quantity=quantity)
+    favorite_item.delete()
+    return redirect('favorite')
+
+
+def favorite(request, total=0, quantity=0, favorite_items=None):
+    try:
+        favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
+        favorite_items = FavoriteItem.objects.filter(favorite=favorite, is_active=True)
+        for favorite_item in favorite_items:
+            total += (favorite_item.product.price * favorite_item.quantity)
+            quantity += favorite_item.quantity
+    except ObjectDoesNotExist:
+        pass #ignora
+
+    context = {
+        'total': total,
+        'quantity': quantity,
+        'favorite_items': favorite_items
+    }
+
+    return render(request, 'store/favorite.html', context)

@@ -9,7 +9,13 @@
     <div class="container">
 
     <!-- ============================ COMPONENT 1 ================================= -->
-
+    {% if not favorite_items %}
+      <h2 class="text-center">No tienes Favoritos</h2>
+      <br>
+      <div class="text-center">
+        <a href="{% url 'store' %}" class="btn btn-primary">Ver Inmuebles</a>
+      </div>
+    {%  else %}
     <div class="row">
         <aside class="col-lg-9">
     <div class="card">
@@ -22,12 +28,15 @@
     </tr>
     </thead>
     <tbody>
+
+
+    {% for favorite_item in favorite_items %}
     <tr>
         <td>
             <figure class="itemside align-items-center">
-                <div class="aside"><img src="./images/items/11.jpg" class="img-sm"></div>
+                <div class="aside"><img src="{{ favorite_item.product.images.url }}" class="img-sm"></div>
                 <figcaption class="info">
-                    <a href="#" class="title text-dark">Camera Canon EOS M50 Kit</a>
+                    <a href="{{ favorite_item.product.get_url }}" class="title text-dark">{{ favorite_item.product.product_name }}</a>
                     <p class="text-muted small">Matrix: 25 Mpx <br> Marca: Canon</p>
                 </figcaption>
             </figure>
@@ -38,13 +47,17 @@
         </td>
         <td>
             <div class="price-wrap">
-                <var class="price">L.1156.00</var>
+                <var class="price">L.{{ favorite_item.sub_total }}</var>
             </div> <!-- price-wrap .// -->
         </td>
         <td class="text-right">
-        <a href="" class="btn btn-danger"> Eliminar</a>
+        <a href="{% url 'remove_favorite_item' favorite_item.product.id %}" class="btn btn-danger"> Eliminar</a>
         </td>
     </tr>
+    {% endfor %}
+
+    <a href="{% url 'store' %}" class="btn btn-light btn-block">Continua explorando</a>
+
     </tbody>
     </table>
     </div> <!-- card.// -->
@@ -54,7 +67,7 @@
 
     </div> <!-- row.// -->
     <!-- ============================ COMPONENT 1 END .// ================================= -->
-
+    {%  endif %}
     </div> <!-- container .//  -->
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
