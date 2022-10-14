@@ -28,7 +28,7 @@
   <div class="row align-items-center">
   	<div class="col-lg-2 col-md-3 col-6">
   		<a href="{% url 'home' %}" class="brand-wrap">
-  			<img class="logo" src="{% static './images/logo01.png' %}">
+  			<img class="logo" src="{% static '' %}">
   		</a> <!-- brand-wrap.// -->
   	</div>
   	<div class="col-lg col-sm col-md col-6 flex-grow-0">
@@ -47,9 +47,12 @@
 
   	<a href="{% url 'store' %}" class="btn btn-outline-primary">Inmbuebles</a>
   	<div class="col-lg  col-md-6 col-sm-12 col">
-  		<form action="#" class="search">
+
+
+
+      <form action="{% url 'search' %}" class="search">
   			<div class="input-group w-100">
-  			    <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+  			    <input type="text" class="form-control" style="width:60%;" placeholder="Buscar Inmbuebles" name="keyword">
 
   			    <div class="input-group-append">
   			      <button class="btn btn-primary" type="submit">
@@ -58,6 +61,10 @@
   			    </div>
   		    </div>
   		</form> <!-- search-wrap .end// -->
+
+
+
+
   	</div> <!-- col.// -->
   	<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
   				<div class="d-flex justify-content-end mb-3 mb-lg-0">
