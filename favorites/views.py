@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from store.models import Product
 from .models import Favorite, FavoriteItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -44,7 +46,7 @@ def remove_favorite_item(request, product_id, quantity=1):
     favorite_item.delete()
     return redirect('favorite')
 
-
+@login_required(login_url='login')
 def favorite(request, total=0, quantity=0, favorite_items=None):
     try:
         favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
@@ -62,3 +64,7 @@ def favorite(request, total=0, quantity=0, favorite_items=None):
     }
 
     return render(request, 'store/favorite.html', context)
+
+@login_required(login_url='login')
+def communicate(request):
+    return render(request, 'store/communicate.html')

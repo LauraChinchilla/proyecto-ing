@@ -30,7 +30,7 @@
 
     <hr>
 
-      
+
         <hr>
 
         {% if single_product.stock <= 0 %}
@@ -45,7 +45,10 @@
 
           {% else %}
 
-            <a href="{% url 'add_favorite' single_product.id %}" class="btn  btn-primary"> <span class="text">Agregar a Favoritos</span> <i class="fas fa-shopping-cart"></i>  </a>
+            <a href="{% url 'add_favorite' single_product.id %}" class="btn  btn-primary"> <span class="text">Agregar a Favoritos</span> <i class="fas fa-star"></i>  </a>
+            <a href="{% url 'communicate' %}" class="btn  btn-primary"> <span class="text">Hablar con el Vendedor</span> <i class="fas fa-phone"></i>  </a>
+
+
 
           {% endif %}
 
