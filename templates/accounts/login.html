@@ -5,6 +5,17 @@
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-conten padding-y" style="min-height:84vh">
 
+    {% if request.GET.command == 'verification' %}
+      <div class="container mx-auto alert alert-info" role="alert" style="max-width=380px; margin-top=100px">
+        Muchas gracias por registrarte. Te hemos enviado un email para confirmar tu cuenta [{{ request.GET.email }}]
+        <br><br>
+        Si ya verificaste tu cuenta aca puedes iniciar sesion <a href="{% url 'login' %}">Inicio de Sesion</a>
+      </div>
+
+    {% else %}
+
+
+
     <!-- ============================ COMPONENT LOGIN   ================================= -->
         <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
           {% include 'includes/alerts.html' %}
@@ -36,6 +47,7 @@
          <br><br>
     <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
 
+    {% endif %}
 
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
