@@ -77,31 +77,35 @@
 						<article class="filter-group">
 							<header class="card-header">
 								<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
-									<i class="icon-control fa fa-chevron-down"></i>
+
+									<!-- <i class="icon-control fa fa-chevron-down"></i>
 									<h6 class="title">Numero de Habitaciones </h6>
+								 -->
+
 								</a>
 							</header>
 							<div class="filter-content collapse show" id="collapse_4" style="">
 								<div class="card-body">
-									<label class="checkbox-btn">
-										<input type="checkbox">
-										<span class="btn btn-light"> 1 </span>
-									</label>
+									<!--	<label class="checkbox-btn">
+											<input type="checkbox">
+											<span class="btn btn-light"> 1 </span>
+										</label>
 
-									<label class="checkbox-btn">
-										<input type="checkbox">
-										<span class="btn btn-light"> 2 </span>
-									</label>
+										<label class="checkbox-btn">
+											<input type="checkbox">
+											<span class="btn btn-light"> 2 </span>
+										</label>
 
-									<label class="checkbox-btn">
-										<input type="checkbox">
-										<span class="btn btn-light"> 3 </span>
-									</label>
+										<label class="checkbox-btn">
+											<input type="checkbox">
+											<span class="btn btn-light"> 3 </span>
+										</label>
 
-									<label class="checkbox-btn">
-										<input type="checkbox">
-										<span class="btn btn-light"> 5 </span>
-									</label>
+										<label class="checkbox-btn">
+											<input type="checkbox">
+											<span class="btn btn-light"> 5 </span>
+										</label> -->
+
 								</div><!-- card-body.// -->
 							</div>
 						</article> <!-- filter-group .// -->
@@ -109,8 +113,10 @@
 						<article class="filter-group">
 							<header class="card-header">
 								<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+									<!--
 									<i class="icon-control fa fa-chevron-down"></i>
 									<h6 class="title">Rango de Precios </h6>
+									-->
 								</a>
 							</header>
 							<div class="filter-content collapse show" id="collapse_3" style="">
@@ -118,8 +124,11 @@
 
 									<div class="form-row">
 										<div class="form-group col-md-6">
+											<!--
 											<label>Min</label>
+											-->
 											<!-- <input class="form-control" placeholder="$0" type="number"> -->
+											<!--
 											<select class="mr-2 form-control">
 												<option value="0">L.0</option>
 												<option value="50">L2000</option>
@@ -128,9 +137,10 @@
 												<option value="200">L5000</option>
 												<option value="500">L10000</option>
 												<option value="1000">L15000</option>
-											</select>
+											</select> -->
 										</div>
 										<div class="form-group text-right col-md-6">
+											<!--
 											<label>Max</label>
 											<select class="mr-2 form-control">
 												<option value="0">L.2500</option>
@@ -141,9 +151,12 @@
 												<option value="500">L15000</option>
 												<option value="1000">L20000</option>
 											</select>
+											-->
 										</div>
 									</div> <!-- form-row.// -->
+									<!--
 									<button class="btn btn-block btn-primary">Aplicar</button>
+									-->
 								</div><!-- card-body.// -->
 							</div>
 						</article> <!-- filter-group .// -->
@@ -151,6 +164,8 @@
 					</div> <!-- card.// -->
 
 				</aside> <!-- col.// -->
+
+
 				<main class="col-md-9">
 
 					<header class="border-bottom mb-4 pb-3">
@@ -190,39 +205,40 @@
 
 						{% endif %}
 
-						<nav class="mt-4" aria-label="Page navigation sample">
 
-							{% if products.has_other_pages %}
-						  <ul class="pagination">
-
-								{% if products.has_previous %}
-						    <li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}">Anterior</a></li>
-								{%else%}
-								<li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-								{% endif %}
-
-
-								{% for i in products.paginator.page_range %}
-									{% if products.number == i %}
-										<li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
-									{% else %}
-										<li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-									{%endif%}
-
-								{% endfor %}
-
-								{% if products.has_next %}
-						    	<li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Siguiente</a></li>
-								{% else %}
-									<li class="page-item disabled"><a class="page-link" href="#">Siguiente</a></li>
-								{% endif %}
-
-						  </ul>
-							{% endif %}
-
-
-						</nav>
 								</main>
+								<nav class="mt-4" aria-label="Page navigation sample">
+
+									{% if products.has_other_pages %}
+									<ul class="pagination">
+
+										{% if products.has_previous %}
+										<li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}">Anterior</a></li>
+										{%else%}
+										<li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+										{% endif %}
+
+
+										{% for i in products.paginator.page_range %}
+											{% if products.number == i %}
+												<li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+											{% else %}
+												<li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+											{%endif%}
+
+										{% endfor %}
+
+										{% if products.has_next %}
+											<li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Siguiente</a></li>
+										{% else %}
+											<li class="page-item disabled"><a class="page-link" href="#">Siguiente</a></li>
+										{% endif %}
+
+									</ul>
+									{% endif %}
+
+
+								</nav>
 							</div>
 
 							</div> <!-- container .//  -->
