@@ -1,10 +1,13 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Product
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Product, ReviewRating
 from category.models import Category
 from favorites.models import FavoriteItem
 from favorites.views import _favorite_id
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
+from .forms import ReviewForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -40,9 +43,14 @@ def product_detail(request, category_slug, product_slug):
     except Exception as e:
         raise e
 
+
+    reviews = ReviewRating.objects.filter(product_id=single_product.id, status=True)
+
+
     context = {
         'single_product':single_product,
         'in_favorite':in_favorite,
+        'reviews':reviews,
     }
 
     return render(request, 'store/product_detail.html', context)
@@ -64,3 +72,29 @@ def search(request):
     }
 
     return render(request, 'store/store.html', context)
+
+
+
+@login_required(login_url='login')
+def submit_review(request, product_id):
+    url = request.META.get('HTTP_REFERER')
+    if request.method == 'POST':
+        try:
+            reviews = ReviewRating.objects.get(user__id=request.user.id, product__id=product_id)
+            form = ReviewForm(request.POST, instance=reviews)
+            form.save()
+            messages.success(request, 'Muchas Gracias, tu comentario ha sido actualizado')
+            return redirect(url)
+        except ReviewRating.DoesNotExist:
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                data = ReviewRating()
+                data.subject = form.cleaned_data['subject']
+                data.rating = form.cleaned_data['rating']
+                data.review = form.cleaned_data['review']
+                data.ip = request.META.get('REMOTE_ADDR')
+                data.product_id = product_id
+                data.user_id = request.user.id
+                data.save()
+                messages.success(request, 'Muchas Gracias, tu comentario fue enviado con exito')
+                return redirect(url)
