@@ -46,7 +46,7 @@
 <body>
 
 	<!-- ========================= SECTION CONTENT ========================= -->
-	<section class="section-content padding-y">
+	<section class="section-content padding-y contenido" style="background:#D2E8E3;">
 		<div class="container">
 
 			<div class="row">
@@ -179,7 +179,7 @@
 						{% if products %}
 						{% for product in products %}
 						<div class="col-md-4">
-							<figure class="card card-product-grid">
+							<figure class="card card-product-grid" style="box-shadow: 5px 5px 15px rgba(0,0,0,0.3); background: #FFCB9A;">
 								<div class="img-wrap">
 
 									<a href="{{ product.get_url }}"><img src="{{ product.images.url }}"></a>
