@@ -9,6 +9,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.core.mail import EmailMessage
+
+from favorites.views import _favorite_id
+from favorites.models import Favorite, FavoriteItem
 # Create your views here.
 
 
@@ -27,6 +30,17 @@ def register(request):
             user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
             user.phone_nomber = phone_nomber
             user.save()
+
+
+
+            profile = UserProfile()
+            profile.user_id = user.id
+            profile.profile_picture = 'default/default-user.png'
+            profile.save()
+
+
+
+
 
             current_site = get_current_site(request)
             mail_subject = 'Activa tu cuenta en MiCasaYaa'
@@ -60,6 +74,20 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
+
+            try:
+                favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
+                is_favorite_item_exists = FavoriteItem.objects.filter(favorite=favorite).exists()
+                if is_favorite_item_exists:
+                    favorite_item = FavoriteItem.objects.filter(favorite=favorite)
+                    for item in favorite_item:
+                        item.user = user
+                        item.save()
+            except:
+                pass
+
+
+
             auth.login(request, user)
             return redirect('home')
         else:
@@ -99,7 +127,14 @@ def activate(request,uidb64, token):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    userprofile = UserProfile.objects.get(user_id=request.user.id)
+
+    context = {
+        'userprofile':userprofile,
+    }
+
+
+    return render(request, 'accounts/dashboard.html', context)
 
 
 def forgotPassword(request):
@@ -166,7 +201,7 @@ def resetPassword(request):
     else:
         return render(request, 'accounts/resetPassword.html')
 
-
+@login_required(login_url='login')
 def edit_profile(request):
     userprofile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
@@ -177,14 +212,41 @@ def edit_profile(request):
             profile_form.save()
             messages.success(request, 'Su informacion fue guardada con exito')
             return redirect('edit_profile')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = UserProfileForm(instance=userprofile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'userprofile': userprofile,
+    }
+
+    return render(request, 'accounts/edit_profile.html', context)
+
+
+@login_required(login_url='login')
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        user = Account.objects.get(username__exact=request.user.username)
+
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+
+                messages.success(request, 'La contraseña se actualizo correctamente')
+                return redirect('change_password')
+            else:
+                messages.error(request, 'Ingrese una contraseña valida')
+                return redirect('change_password')
         else:
-            user_form = UserForm(instance=request.user)
-            profile_form = UserProfileForm(instance=userprofile)
+            messages.error(request, 'La contraseña no coincide con la confirmacion de contraseña')
+            return redirect('change_password')
 
-        context = {
-            'user_form': user_form,
-            'profile_form': profile_form,
-            'userprofile': userprofile,
-        }
-
-        return render(request, 'accounts/edit_profile.html', context)
+    return render(request, 'accounts/change_password.html')
