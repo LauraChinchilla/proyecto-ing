@@ -16,7 +16,7 @@
 
 <!-- ========================= SECTION  ========================= -->
 </style>
-<section class="section-name padding-y-sm" style="background:#D2E8E3;">
+<section class="section-name padding-y-sm" >
 <div class="container" />
 <header class="section-heading">
 <!--
@@ -31,7 +31,7 @@
 
 	{% for product in products %}
 	<div class="col-md-3">
-		<div class="card card-product-grid" style="box-shadow: 5px 5px 15px rgba(0,0,0,0.3); background: #FFCB9A;">
+		<div class="card card-product-grid" style="box-shadow: 5px 5px 15px rgba(0,0,0,0.3); background: #A1C7E0;">
 			<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
 			<figcaption class="info-wrap">
 				<a href="{{ product.get_url }}" class="title">{{product.product_name}}</a>
