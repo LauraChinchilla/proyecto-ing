@@ -17,17 +17,16 @@
                 <strong class="d-inline-block mr-3">Editar Perfil de Usuario</strong>
             </header>
             <div class="card-body">
-              <div class="text-rigth">
+              <div class="text-center">
                   <img src="{{userprofile.profile_picture.url}}" alt="Imagen de Perfil" width="100" style="border-radius:50px;">
               </div>
 
 
               <div class="row">
+
                 <div class="col-md-12">
                   <form class="" action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
                       {% csrf_token %}
-
-
                       <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="">Nombre</label>
@@ -65,6 +64,7 @@
                           </div>
 
                           <div class="form-row">
+
                             <div class="form-group col-md-4">
                               <label for="">Ciudad</label>
                               {{ profile_form.city }}
@@ -79,9 +79,10 @@
                               <label for="">Pais</label>
                               {{ profile_form.country }}
                             </div>
+
                           </div>
 
-                          <input type="submit" name="" value="Guardae" class="btn btn-primary">
+                          <input type="submit" name="" value="Guardar" class="btn btn-primary">
 
                   </form>
 
