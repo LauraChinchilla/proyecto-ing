@@ -13,3 +13,4 @@ def counter(request):
     except Favorite.DoesNotExist:
         favorite_count = 0
     return dict(favorite_count=favorite_count)
+    
