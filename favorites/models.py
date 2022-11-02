@@ -1,6 +1,6 @@
 from django.db import models
 from store.models import Product
-
+from accounts.models import Account
 
 # Create your models here.
 
@@ -13,8 +13,9 @@ class Favorite(models.Model):
         return self.favorite_id
 
 class FavoriteItem(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    favorite = models.ForeignKey(Favorite, on_delete=models.CASCADE)
+    favorite = models.ForeignKey(Favorite, on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
 

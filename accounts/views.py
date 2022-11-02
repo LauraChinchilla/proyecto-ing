@@ -9,6 +9,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.core.mail import EmailMessage
+
+from favorites.views import _favorite_id
+from favorites.models import Favorite, FavoriteItem
 # Create your views here.
 
 
@@ -71,6 +74,20 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
+
+            try:
+                favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
+                is_favorite_item_exists = FavoriteItem.objects.filter(favorite=favorite).exists()
+                if is_favorite_item_exists:
+                    favorite_item = FavoriteItem.objects.filter(favorite=favorite)
+                    for item in favorite_item:
+                        item.user = user
+                        item.save()
+            except:
+                pass
+
+
+
             auth.login(request, user)
             return redirect('home')
         else:

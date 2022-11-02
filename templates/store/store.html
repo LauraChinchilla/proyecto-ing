@@ -86,25 +86,7 @@
 							</header>
 							<div class="filter-content collapse show" id="collapse_4" style="">
 								<div class="card-body">
-									<!--	<label class="checkbox-btn">
-											<input type="checkbox">
-											<span class="btn btn-light"> 1 </span>
-										</label>
 
-										<label class="checkbox-btn">
-											<input type="checkbox">
-											<span class="btn btn-light"> 2 </span>
-										</label>
-
-										<label class="checkbox-btn">
-											<input type="checkbox">
-											<span class="btn btn-light"> 3 </span>
-										</label>
-
-										<label class="checkbox-btn">
-											<input type="checkbox">
-											<span class="btn btn-light"> 5 </span>
-										</label> -->
 
 								</div><!-- card-body.// -->
 							</div>
@@ -124,39 +106,14 @@
 
 									<div class="form-row">
 										<div class="form-group col-md-6">
-											<!--
-											<label>Min</label>
-											-->
-											<!-- <input class="form-control" placeholder="$0" type="number"> -->
-											<!--
-											<select class="mr-2 form-control">
-												<option value="0">L.0</option>
-												<option value="50">L2000</option>
-												<option value="100">L3000</option>
-												<option value="150">L4000</option>
-												<option value="200">L5000</option>
-												<option value="500">L10000</option>
-												<option value="1000">L15000</option>
-											</select> -->
+
 										</div>
 										<div class="form-group text-right col-md-6">
-											<!--
-											<label>Max</label>
-											<select class="mr-2 form-control">
-												<option value="0">L.2500</option>
-												<option value="50">L3000</option>
-												<option value="100">L4000</option>
-												<option value="150">L9000</option>
-												<option value="200">L10000</option>
-												<option value="500">L15000</option>
-												<option value="1000">L20000</option>
-											</select>
+
 											-->
 										</div>
 									</div> <!-- form-row.// -->
-									<!--
-									<button class="btn btn-block btn-primary">Aplicar</button>
-									-->
+
 								</div><!-- card-body.// -->
 							</div>
 						</article> <!-- filter-group .// -->
@@ -191,9 +148,20 @@
 										<div class="price-wrap mt-2">
 											<span class="price">L. {{product.price}}</span>
 										</div> <!-- price-wrap.// -->
+
+										<div class="rating-star">
+								      <span>
+								        <i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+								        <i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+								        <i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+								        <i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+								        <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+								      </span>
+								    </div>
+
 									</div>
-									<a href="{% url 'add_favorite' product.id %}" class="btn btn-block btn-success">Agregar a Favoritos  <i class="fas fa-star"></i> </a>
-									<a href="{% url 'communicate'  %}" class="btn btn-block btn-success"> Hablar con el vendedor  <i class="fas fa-phone"></i></a>
+
+											<a href="{% url 'communicate'  %}" class="btn btn-block btn-success"> Hablar con el vendedor  <i class="fas fa-phone"></i></a>
 								</figcaption>
 							</figure>
 						</div> <!-- col.// -->
