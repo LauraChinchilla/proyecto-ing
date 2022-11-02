@@ -20,7 +20,7 @@ class FavoriteItem(models.Model):
     is_active = models.BooleanField(default=True)
 
     def sub_total(self):
-        return self.product.price*self
+        return self.product.price
 
     def __unicode__(self):
         return self.product
