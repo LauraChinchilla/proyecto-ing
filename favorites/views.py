@@ -12,7 +12,7 @@ def _favorite_id(request):
     if not favorite:
         favorite = request.session.create()
     return favorite
-
+    
 
 def add_favorite(request, product_id):
     product = Product.objects.get(id=product_id)
