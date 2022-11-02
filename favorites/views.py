@@ -12,7 +12,7 @@ def _favorite_id(request):
     if not favorite:
         favorite = request.session.create()
     return favorite
-    
+
 
 def add_favorite(request, product_id):
     product = Product.objects.get(id=product_id)
@@ -46,11 +46,15 @@ def remove_favorite_item(request, product_id, quantity=1):
     favorite_item.delete()
     return redirect('favorite')
 
-@login_required(login_url='login')
+
 def favorite(request, total=0, quantity=0, favorite_items=None):
     try:
-        favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
-        favorite_items = FavoriteItem.objects.filter(favorite=favorite, is_active=True)
+        if request.user.is_authenticated:
+            favorite_items = FavoriteItem.objects.filter(user=request.user, is_active=True)
+        else:
+            favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
+            favorite_items = FavoriteItem.objects.filter(favorite=favorite, is_active=True)
+
         for favorite_item in favorite_items:
             total += (favorite_item.product.price * favorite_item.quantity)
             quantity += favorite_item.quantity

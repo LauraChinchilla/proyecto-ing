@@ -75,7 +75,6 @@ class Account(AbstractBaseUser):
 
 
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(Account, on_delete = models.CASCADE)
     address_line_1 = models.CharField(blank=True, max_length=100)
