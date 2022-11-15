@@ -74,7 +74,6 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
-
             try:
                 favorite = Favorite.objects.get(favorite_id=_favorite_id(request))
                 is_favorite_item_exists = FavoriteItem.objects.filter(favorite=favorite).exists()
