@@ -133,7 +133,7 @@ STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
     'proyecto/static'
 ]
-STATICFILES_STORAGE = 'withenoise.storage.CompressedMainfestStaticFilesStorage'#heroku
+STATICFILES_STORAGE = 'withenoise.storage.CompressedManifestStaticFilesStorage'#heroku
 
 
 MEDIA_URL = '/media/'
