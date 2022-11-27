@@ -23,9 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mb9_m6%jjf*%qa-2xy-yprw3-j3k=9!95zop9di#spaqzue3a8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+#-------------------------Cambios hechos para subirlo a heroku-------------------
+#DEBUG = True
+DEBUG = False
+
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
     'favorites',
 ]
 
+#agregado 'whitenoise.middleware.WhiteNoiseMiddleware' para heroku
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 SESSION_EXPIRE_SECONDS = 1000
@@ -158,3 +164,6 @@ EMAIL_USE_TLS = True
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#agregado para  heroku
+STATIFILES_STORAGE = 'whitenoise.starage.CompressedManifestStaticFilesStorage'

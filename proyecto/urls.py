@@ -25,4 +25,6 @@ urlpatterns = [
     path('store/', include('store.urls')),
     path('favorite/', include('favorites.urls')),
     path('accounts/', include('accounts.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+ #modificado para heroku
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
