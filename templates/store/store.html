@@ -41,9 +41,58 @@
 
 									<i class="icon-control fa fa-chevron-down"></i>
 									<h6 class="title">Rango de Precios </h6>
-
 								</a>
 							</header>
+									<div class="filter-content collapse show" id="collapse_3" style="">
+										<div class="card-body">
+
+											<ul class="list-menu">
+
+												<li><a href="{% url 'store' %}" >Todos  </a></li>
+
+												<h6>De 0 a 50,000</h6>
+
+												{% for product in products%}
+												{% if product.price >= 0 and product.price <= 50000 %}
+												<li><a href="{{ product.get_url }}" >{{ product.product_name }}</a></li>
+												{% endif %}
+												{% endfor %}
+
+
+												<h6>De 50,0001 a 100,000</h6>
+												{% for product in products%}
+												{% if product.price >= 50001 and product.price <= 100000 %}
+												<li><a href="{{ product.get_url }}"> {{product.product_name}} </a></li>
+												{% endif %}
+												{% endfor %}
+
+												<h6>De 100,001 a 1,000,000</h6>
+												{% for product in products%}
+												{% if product.price >= 100001 and product.price <= 1000000 %}
+												<li><a href="{{ product.get_url }}"> {{product.product_name}} </a></li>
+												{% endif %}
+												{% endfor %}
+
+												<h6>De 1,000,0001 a 5,000,000</h6>
+												{% for product in products%}
+												{% if product.price >= 1000001 and product.price <= 5000000 %}
+												<li><a href="{{ product.get_url }}"> {{product.product_name}} </a></li>
+												{% endif %}
+												{% endfor %}
+
+												<h6>Mayores a 5,000,000</h6>
+												{% for product in products%}
+												{% if product.price >= 5000001 %}
+												<li><a href="{{ product.get_url }}"> {{product.product_name}} </a></li>
+												{% endif %}
+
+												{% endfor %}
+											</ul>
+
+										</div> <!-- card-body.// -->
+									</div>
+										</article> <!-- filter-group .// -->
+
 							<div class="filter-content collapse show" id="collapse_3" style="">
 								<div class="card-body">
 
@@ -52,14 +101,14 @@
 
 										</div>
 										<div class="form-group text-right col-md-6">
-
+											
 
 										</div>
 									</div> <!-- form-row.// -->
 
 								</div><!-- card-body.// -->
 							</div>
-						</article> <!-- filter-group .// -->
+
 
 					</div> <!-- card.// -->
 

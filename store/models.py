@@ -18,6 +18,9 @@ class Product(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
 
     def get_url(self):
+        return reverse('products_by_price', args=[self.slug])
+
+    def get_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
 
     def __str__(self):
