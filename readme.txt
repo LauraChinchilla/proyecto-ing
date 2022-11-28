@@ -3,3 +3,4 @@ Django==4.1.2
 Pillow==9.2.0
 sqlparse==0.4.3
 tzdata==2022.4
+whitenoise==6.2.0

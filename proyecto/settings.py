@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-mb9_m6%jjf*%qa-2xy-yprw3-j3k=9!95zop9di#spaqzue3a8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False #para el heroku
 
-ALLOWED_HOSTS = [] #heroku
+ALLOWED_HOSTS = ['*'] #heroku
 
 
 # Application definition
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'#heroku
+    'whitenoise.middleware.WhiteNoiseMiddleware',#heroku
 ]
 
 SESSION_EXPIRE_SECONDS = 1000
@@ -133,7 +133,7 @@ STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
     'proyecto/static'
 ]
-STATICFILES_STORAGE = 'withenoise.storage.CompressedManifestStaticFilesStorage'#heroku
+#STATICFILES_STORAGE = 'withenoise.storage.CompressedManifestStaticFilesStorage'#heroku
 
 
 MEDIA_URL = '/media/'
