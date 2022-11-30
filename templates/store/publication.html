@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+    {% include 'includes/alerts.html' %}
+
+    <div class="container">
+        <div class="row">
+          {% include 'includes/dashboard_sidebar.html' %}
+
+        <main class="col-md-9">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Crear Producto</strong>
+            </header>
+            <div class="card-body">
+
+              <div class="row">
+
+                <div class="col-md-12">
+                  <form class="" action="{% url 'cre_product' %}" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="">Nombre del producto</label>
+                          {{ form_product.product_name }}
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="">Slug del producto</label>
+                          {{ form_product.slug }}
+                        </div>
+                      </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="">Descripcion del Producto</label>
+                            {{ form_product.descripton }}
+                          </div>
+                        </div>
+
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="">Imagen del Producto</label>
+                              {{ form_product.images }}
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="">Precio del producto</label>
+                              {{ form_product.price }}
+                            </div>
+                          </div>
+
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="">Cantidad a vender del producto</label>
+                              {{ form_product.stock }}
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="">Categoria del Producto</label>
+                              {{ form_product.category }}
+                            </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block"> Crear Producto  </button>
+                            </div> <!-- form-group// -->
+
+                  </form>
+
+                </div>
+
+              </div>
+
+
+
+            </div>
+
+            </article> <!-- order-group.// -->
+        </main>
+
+    </div> <!-- row.// -->
+    </div>
+
+
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}
