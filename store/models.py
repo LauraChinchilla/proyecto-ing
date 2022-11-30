@@ -6,6 +6,24 @@ from django.db.models import Avg, Count
 from django.db import models #cloudinary
 from cloudinary.models import CloudinaryField #cloudinary
 
+class createProducto():
+        def create_product(product_name, slug, descripton, price, images, stock, category):#crear producto
+
+            product = self.model(
+                product_name = product_name,
+                slug = slug,
+                descripton = descripton,
+                price = price,
+                images = images,
+                stock = stock,
+                category = category,
+            )
+
+            product.save(using=self._db)
+            return product
+
+
+
 # Create your models here.
 class Product(models.Model):
     product_name = models.CharField(max_length=200, unique=True)
@@ -18,6 +36,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
+
+    objects = createProducto()
 
     def get_url(self):
         return reverse('products_by_price', args=[self.slug])
