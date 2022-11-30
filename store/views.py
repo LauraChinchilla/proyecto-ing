@@ -5,36 +5,31 @@ from favorites.models import FavoriteItem
 from favorites.views import _favorite_id
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
-from .forms import ReviewForm
+from .forms import ReviewForm, RegistrationProduct
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
-# def store(request, category_slug=None):
-#     categories = None
-#     products = None
-#
-#     if category_slug != None:
-#         categories = get_object_or_404(Category, slug = category_slug)
-#         products = Product.objects.filter(category=categories, is_available=True).order_by('id')
-#         paginator = Paginator(products, 6)
-#         page = request.GET.get('page')
-#         paged_products = paginator.get_page(page)
-#         product_count = products.count()
-#     else:
-#         products = Product.objects.all().filter(is_available=True).order_by('id')
-#         paginator = Paginator(products, 6)
-#         page = request.GET.get('page')
-#         paged_products = paginator.get_page(page)
-#         product_count = products.count()
-#
-#
-#     context = {
-#         'products':paged_products,
-#         'product_count':product_count,
-#     }
-#     return render(request, 'store/store.html', context)
+def registerProduct(request):#crear producto
+    form_product = RegistrationProduct()
+    if request.method == 'POST':
+        form_product = RegistrationProduct(request.POST)
+        if form_product.is_valid():
+            product_name = form.cleaned_data['product_name']
+            slug = form.cleaned_data['slug']
+            descripton = form.cleaned_data['descripton']
+            price = form.cleaned_data['price']
+            images = form.cleaned_data['images']
+            stock = form.cleaned_data['stock']
+            category = form.cleaned_data['category']
+
+            product = Product.objects.create_product(product_name=product_name, slug=slug, descripton=descripton, price=price, images=images, stock=stock, category=category)
+            product.save()
+
+    context = {
+        'form_product': form_product
+    }
+    return render(request, 'store/publication.html', context)
 
 def store(request, category_slug=None ):##
     categories = None
