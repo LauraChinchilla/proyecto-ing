@@ -38,7 +38,7 @@ class RegistrationProduct(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['product_name','slug', 'descripton', 'price', 'images', 'stock', 'category']
+        fields = ['product_name','slug', 'descripton', 'price', 'images', 'stock', 'is_available', 'category']
 
 
     def __int__(self, *args, **kwargs):
