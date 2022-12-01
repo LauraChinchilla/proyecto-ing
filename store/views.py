@@ -1,23 +1,55 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, ReviewRating
+from .models import Product, ReviewRating#, ProductGallery
 from category.models import Category
 from favorites.models import FavoriteItem
 from favorites.views import _favorite_id
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
-from .forms import ReviewForm
+from .forms import ReviewForm, RegistrationProduct
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
+def registerProduct(request):#crear producto
+    form_product = RegistrationProduct()
 
-# Create your views here.
-def store(request, category_slug=None):
+    if request.method == 'POST':
+        form_product = RegistrationProduct(request.POST, request.FILES)
+        print("hola")
+        print(request.POST)
+        if form_product.is_valid():
+            product_name = form_product.cleaned_data['product_name']
+            slug = form_product.cleaned_data['slug']
+            descripton = form_product.cleaned_data['descripton']
+            price = form_product.cleaned_data['price']
+            images = form_product.cleaned_data['images']
+            stock = form_product.cleaned_data['stock']
+            is_available = form_product.cleaned_data['is_available']
+            category = form_product.cleaned_data['category']
+
+            #product = Product.objects.create_product(product_name=product_name, slug=slug, descripton=descripton, price=price, images=images, stock=stock, is_available=is_available, category=category)
+            form_product.save()
+            messages.success(request, 'El producto se agrego con exito')
+            return redirect('cre_product')
+
+        else:
+            messages.error(request, 'Error al publicar producto')
+            return redirect('cre_product')
+
+    context = {
+        'form_product': form_product
+    }
+    return render(request, 'store/publication.html', context)
+
+def store(request, category_slug=None ):##
     categories = None
     products = None
+    #price_product = None##
 
     if category_slug != None:
         categories = get_object_or_404(Category, slug = category_slug)
-        products = Product.objects.filter(category=categories, is_available=True).order_by('id')
+        #price_product = get_object_or_404(Product, price = price_product_slug)##
+        products = Product.objects.filter(category=categories , is_available=True).order_by('id')##
         paginator = Paginator(products, 6)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
@@ -46,11 +78,13 @@ def product_detail(request, category_slug, product_slug):
 
     reviews = ReviewRating.objects.filter(product_id=single_product.id, status=True)
 
+    #product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
 
     context = {
         'single_product':single_product,
         'in_favorite':in_favorite,
         'reviews':reviews,
+        #'product_gallery':product_gallery,
     }
 
     return render(request, 'store/product_detail.html', context)
