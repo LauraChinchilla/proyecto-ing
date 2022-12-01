@@ -7,7 +7,7 @@ from django.db import models #cloudinary
 from cloudinary.models import CloudinaryField #cloudinary
 
 class createProducto():
-        def create_product(product_name, slug, descripton, price, images, stock, category):#crear producto
+        def create_product(product_name, slug, descripton, price, images, stock, is_available, category):#crear producto
 
             product = self.model(
                 product_name = product_name,
@@ -16,6 +16,7 @@ class createProducto():
                 price = price,
                 images = images,
                 stock = stock,
+                is_available = is_available,
                 category = category,
             )
 
@@ -34,6 +35,7 @@ class Product(models.Model):
     stock = models.IntegerField()
     is_available = models.BooleanField(default = True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Account, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 

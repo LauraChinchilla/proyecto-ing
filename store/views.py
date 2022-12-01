@@ -9,22 +9,32 @@ from .forms import ReviewForm, RegistrationProduct
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='login')
 def registerProduct(request):#crear producto
     form_product = RegistrationProduct()
-    if request.method == 'POST':
-        form_product = RegistrationProduct(request.POST)
-        if form_product.is_valid():
-            product_name = form.cleaned_data['product_name']
-            slug = form.cleaned_data['slug']
-            descripton = form.cleaned_data['descripton']
-            price = form.cleaned_data['price']
-            images = form.cleaned_data['images']
-            stock = form.cleaned_data['stock']
-            category = form.cleaned_data['category']
 
-            product = Product.objects.create_product(product_name=product_name, slug=slug, descripton=descripton, price=price, images=images, stock=stock, category=category)
-            product.save()
+    if request.method == 'POST':
+        form_product = RegistrationProduct(request.POST, request.FILES)
+        print("hola")
+        print(request.POST)
+        if form_product.is_valid():
+            product_name = form_product.cleaned_data['product_name']
+            slug = form_product.cleaned_data['slug']
+            descripton = form_product.cleaned_data['descripton']
+            price = form_product.cleaned_data['price']
+            images = form_product.cleaned_data['images']
+            stock = form_product.cleaned_data['stock']
+            is_available = form_product.cleaned_data['is_available']
+            category = form_product.cleaned_data['category']
+
+            #product = Product.objects.create_product(product_name=product_name, slug=slug, descripton=descripton, price=price, images=images, stock=stock, is_available=is_available, category=category)
+            form_product.save()
+            messages.success(request, 'El producto se agrego con exito')
+            return redirect('cre_product')
+
+        else:
+            messages.error(request, 'Error al publicar producto')
+            return redirect('cre_product')
 
     context = {
         'form_product': form_product
