@@ -8,7 +8,7 @@ class ReviewForm(forms.ModelForm):
 
 class RegistrationProduct(forms.ModelForm):
     product_name = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder':'Ingrese Nombre del Producto',
+        'placeholder':'Ingrese Nombre del Inmueble',
         'class': 'form-control',
     }))
 
@@ -23,7 +23,7 @@ class RegistrationProduct(forms.ModelForm):
     # }))
 
     price = forms.IntegerField(widget=forms.TextInput(attrs={
-        'placeholder':'Ingrese Precio del producto',
+        'placeholder':'Ingrese Precio del Inmueble',
         'class': 'form-control',
     }))
 
