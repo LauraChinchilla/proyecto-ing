@@ -24,9 +24,9 @@ SECRET_KEY = 'django-insecure-mb9_m6%jjf*%qa-2xy-yprw3-j3k=9!95zop9di#spaqzue3a8
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#-------------------------Cambios hechos para subirlo a heroku-------------------
-#DEBUG = True
-DEBUG = False
+
+DEBUG = True
+
 
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ["*"]
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    
 ]
 
 SESSION_EXPIRE_SECONDS = 1000
@@ -166,4 +166,3 @@ EMAIL_USE_TLS = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #agregado para  heroku
-STATIFILES_STORAGE = 'whitenoise.starage.CompressedManifestStaticFilesStorage'
