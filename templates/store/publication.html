@@ -14,7 +14,7 @@
         <main class="col-md-9">
             <article class="card">
             <header class="card-header">
-                <strong class="d-inline-block mr-3">Crear Producto</strong>
+                <strong class="d-inline-block mr-3">Crear Inmueble</strong>
             </header>
             <div class="card-body">
 
@@ -25,53 +25,53 @@
                     {% csrf_token %}
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="">Nombre del producto</label>
+                          <label for="">Nombre del Inmueble</label>
                           {{ form_product.product_name }}
                         </div>
 
                         <div class="form-group col-md-6">
-                          <label for="">Slug del producto</label>
+                          <label for="">Slug del Inmueble</label>
                           {{ form_product.slug }}
                         </div>
                       </div>
 
                         <div class="form-row">
                           <div class="form-group col-md-6">
-                            <label for="">Descripcion del Producto</label>
+                            <label for="">Descripcion del Inmueble</label>
                             {{ form_product.descripton }}
                           </div>
                         </div>
 
                           <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label for="">Imagen del Producto</label>
+                              <label for="">Imagen del Inmueble</label>
                               {{ form_product.images }}
                             </div>
                             <div class="form-group col-md-6">
-                              <label for="">Precio del producto</label>
+                              <label for="">Precio del Inmueble</label>
                               {{ form_product.price }}
                             </div>
                           </div>
 
                           <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label for="">Cantidad a vender del producto</label>
+                              <label for="">Cantidad a vender del Inmueble</label>
                               {{ form_product.stock }}
                             </div>
                             <div class="form-group col-md-4">
-                              <label for="">Categoria del Producto</label>
+                              <label for="">Categoria del Inmueble</label>
                               {{ form_product.category }}
                             </div>
                             </div>
 
                             <div class="form-row">
                               <div class="form-group col-md-6">
-                                <label for="">Disponibilidad del producto</label>
+                                <label for="">Disponibilidad del Inmueble</label>
                                 {{ form_product.is_available }}
                               </div>
                               </div>
 
-                            <input type="submit" name="" value="Crear Producto" class="btn btn-primary">
+                            <input type="submit" name="" value="Crear Inmueble" class="btn btn-primary">
 
                   </form>
 
