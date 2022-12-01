@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, ReviewRating, ProductGallery
+from .models import Product, ReviewRating#, ProductGallery
 from category.models import Category
 from favorites.models import FavoriteItem
 from favorites.views import _favorite_id
