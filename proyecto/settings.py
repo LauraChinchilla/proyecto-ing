@@ -27,14 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-<<<<<<< HEAD
 
 
 
 DEBUG = config('DEBUG', cast=bool, default=False)#para el heroku
-=======
-DEBUG = config('DEBUG', cast=bool, default=True)#para el heroku
->>>>>>> parent of 77e15e4 (Update settings.py)
 
 ALLOWED_HOSTS = ['*'] #heroku
 
@@ -62,6 +58,7 @@ INSTALLED_APPS = [
     'favorites',
 ]
 
+#agregado 'whitenoise.middleware.WhiteNoiseMiddleware' para heroku
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -152,6 +149,8 @@ STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
     'proyecto/static'
 ]
+
+
 #STATICFILES_STORAGE = 'withenoise.storage.CompressedManifestStaticFilesStorage'#heroku
 cloudinary.config(
     cloud_name = "dnsy4r0jw",
@@ -159,6 +158,9 @@ cloudinary.config(
     api_secret = "p9Ga9ycFyigzs6agMcK9BvvGOIg"
 
 )
+
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
@@ -171,20 +173,17 @@ MESSAGE_TAGS = {
 }
 
 
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'micasaya.social@gmail.com'
+EMAIL_HOST_PASSWORD = 'lwfrghgvsnxyobsu'
+EMAIL_USE_TLS = True
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-<<<<<<< HEAD
 
 #agregado para  heroku
 #STATIFILES_STORAGE = 'whitenoise.starage.CompressedManifestStaticFilesStorage'
-=======
->>>>>>> parent of 77e15e4 (Update settings.py)
