@@ -28,23 +28,10 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-
-<<<<<<< HEAD
-
-DEBUG = config('DEBUG', cast=bool, default=False)#para el heroku
-=======
 DEBUG = config('DEBUG', cast=bool, default=True)#para el heroku
->>>>>>> parent of 28a84f4 (Update settings.py)
+
 
 ALLOWED_HOSTS = ['*'] #heroku
-
-#-------------------------Cambios hechos para subirlo a heroku-------------------
-#DEBUG = True
-#DEBUG = False
-
-#ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ["*"]
-
 
 
 # Application definition
@@ -190,4 +177,3 @@ EMAIL_USE_TLS = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #agregado para  heroku
-#STATIFILES_STORAGE = 'whitenoise.starage.CompressedManifestStaticFilesStorage'
