@@ -19,8 +19,6 @@ from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 
-
-
 urlpatterns = [
     path('securelogin/', admin.site.urls),
     path('', views.home, name="home"),
@@ -28,5 +26,5 @@ urlpatterns = [
     path('favorite/', include('favorites.urls')),
     path('accounts/', include('accounts.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
+ #modificado para heroku
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

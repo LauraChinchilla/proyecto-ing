@@ -24,24 +24,15 @@
 
 .contenido_hom{
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 50vw;
-    min-height: 35vh;
-    margin: 0px 180px;
-    padding: 0;
     
-    width: 100%;
-    height: 100%;
-
-    background-image: url(../images/infusion.png);
-    background-position:center;
-    background-repeat:no-repeat;	
-    background-size: cover;
+    max-width: 960px;
+    margin: 0 auto;
 
 }
-
+.img{
+    width: 100%;
+height: auto;
+}
 .boton {
     color:#0F6466;
 }
